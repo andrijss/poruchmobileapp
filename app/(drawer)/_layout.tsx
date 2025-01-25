@@ -7,8 +7,14 @@ import { Button, StyleSheet, Text } from 'react-native';
 
 import {ThemedText} from "@/components/ThemedText";
 import {ThemedView} from "@/components/ThemedView";
+import {TouchableOpacity} from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {Drawer} from "expo-router/drawer";
+
+import {Avatar, AvatarFallbackText} from "@gluestack-ui/themed";
+
+import { config } from "@gluestack-ui/config"
+import { GluestackUIProvider } from "@gluestack-ui/themed"
 
 export default function DrawerLayout() {
   const colorScheme = useColorScheme();
@@ -21,7 +27,6 @@ export default function DrawerLayout() {
                 drawerPosition: 'right'
             }}
           >
-              <ThemedText>Shjhjdfhdj</ThemedText>
               <Drawer.Screen
                   name='(tabs)'
                   options={{
@@ -35,28 +40,41 @@ export default function DrawerLayout() {
 
 function CustomDrawerContent({ navigation }:{ navigation: any}) {
     return (
+        <GluestackUIProvider config={config}>
         <ThemedView style={styles.drawerContainer}>
-            <Text style={styles.headerText}>Custom Drawer</Text>
+            <ThemedView style={styles.profileGroup}>
+                <TouchableOpacity onPress={() => navigation.navigate('Account')} style={[styles.profileGroup, {
+                    paddingBottom: 0,
+                    borderBottomWidth: 0,
+                    marginBottom: 0,
+                }]}>
+                    <Avatar bgColor="$amber600" size="lg" borderRadius="$full">
+                        <AvatarFallbackText>John Doe</AvatarFallbackText>
+                    </Avatar>
+                    <ThemedView style={{
+                        left: 18,
+                        top: 15
+                    }}>
+                        <ThemedText style={styles.usernameText}>John Doe</ThemedText>
+                        <ThemedText style={styles.goToProfileText}>Переглянути профіль</ThemedText>
+                    </ThemedView>
+                </TouchableOpacity>
+            </ThemedView>
 
-            {/* Custom Buttons */}
-            <Button
-                title="Go to Profile"
-                onPress={() => navigation.navigate('profile')}
-            />
-            <Button
-                title="Go to Settings"
-                onPress={() => navigation.navigate('settings')}
-            />
-
-            <Text style={styles.footerText}>© CyberGOAT team 2025</Text>
+            <Text style={styles.footerText}>©CyberGOAT team 2025</Text>
         </ThemedView>
+        </GluestackUIProvider>
     );
 }
 
-const styles = StyleSheet.create({
+const styles    = StyleSheet.create({
     drawerContainer: {
         flex: 1,
-        padding: 20,
+        paddingLeft: 32,
+        paddingBottom: 48,
+        paddingTop: Platform.OS === 'ios' ? 80 : 60,
+        // borderLeftColor: '#454242',
+        // borderLeftWidth: 1,
     },
     headerText: {
         fontSize: 18,
@@ -68,4 +86,23 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'gray',
     },
+    profileGroup: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#454242',
+        paddingBottom: 28,
+        width: '120%',
+        left: -32,
+        paddingLeft: 32,
+    },
+    usernameText: {
+        fontSize: 26,
+        fontWeight: 'bold',
+    },
+    goToProfileText: {
+        fontSize: 14,
+        color: 'gray',
+    }
 });

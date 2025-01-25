@@ -9,7 +9,13 @@ import {
     SafeAreaView,
     PanResponder,
 } from 'react-native';
-import {BlurView} from "expo-blur";
+
+import { IconSymbol } from '@/components/ui/IconSymbol';
+
+import { config } from "@gluestack-ui/config"
+import { GluestackUIProvider } from "@gluestack-ui/themed"
+
+import {Avatar, AvatarFallbackText} from "@gluestack-ui/themed";
 
 import { Link } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
@@ -33,12 +39,16 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
     const navigation = useNavigation();
 
     return (
+        <GluestackUIProvider config={config}>
         <ThemedView style={styles.topBar}>
 
             { backButton ?
                 <ThemedView style={styles.backButtonStyle}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <FontAwesome size={26} style={{ marginBottom: -3 }} color={'#fff'} name={'arrow-left'}></FontAwesome>
+                        <IconSymbol size={24} name='chevron.backward' color={'#c4c4c4'} style={{
+                            bottom: -2,
+                            marginRight: 8,
+                        }} />
                     </TouchableOpacity>
                 </ThemedView> : <ThemedView></ThemedView>
             }
@@ -46,9 +56,11 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
             <ThemedText style={styles.bigText}>{text}</ThemedText>
 
             { buttons ? notifications ?
-                <BlurView style={[styles.menuButton, {left: -20}]} intensity={blur ? 50 : 0} tint={'dark'}>
-                        <TouchableOpacity onPress={() => {}}>
-                            <TopBarIcon name={'bell'} color={'#fff'}></TopBarIcon>
+                <ThemedView style={[styles.menuButton, {left: -2}]} >
+                        <TouchableOpacity onPress={() => navigation.navigate('notifications')}>
+                            <IconSymbol size={32} name="bell.fill" color={'#c4c4c4'} style={{
+                                bottom: -3
+                            }} />
                         </TouchableOpacity>
                     <ThemedView style={{
                         position: 'absolute',
@@ -56,24 +68,31 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
                         borderRadius: 10,
                         width: 20,
                         right: 8,
-                        top: 26,
+                        top: 29,
                         height: 20,
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
                         <ThemedText style={{color: '#fff', fontSize: 12, fontWeight: 'bold'}}>3</ThemedText>
                     </ThemedView>
-                </BlurView>: <ThemedView style={styles.menuButton}></ThemedView>  : <ThemedView></ThemedView>
+                </ThemedView>: <ThemedView style={styles.menuButton}></ThemedView>  : <ThemedView></ThemedView>
             }
 
             { buttons ?
-                <BlurView style={styles.menuButton} intensity={blur ? 50 : 0} tint={'dark'}>
-                    <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                        <TopBarIcon name={'bars'} color='#fff'></TopBarIcon>
+                <ThemedView style={styles.menuButton}>
+                    <TouchableOpacity
+                        style={{
+                            top: 3
+                        }}
+                        onPress={() => navigation.openDrawer()}>
+                        <Avatar bgColor="$amber600" size="sm" borderRadius="$full">
+                            <AvatarFallbackText>John Doe</AvatarFallbackText>
+                        </Avatar>
                     </TouchableOpacity>
-                </BlurView> : <ThemedView></ThemedView>
+                </ThemedView> : <ThemedView></ThemedView>
             }
         </ThemedView>
+            </GluestackUIProvider>
     )
 }
 
@@ -107,7 +126,7 @@ const styles = StyleSheet.create({
     bigText: {
         width: '70%',
         padding: 10,
-        paddingLeft: 28,
+        paddingLeft: 24,
         fontWeight: 800,
         fontSize: 36,
         top: 18
@@ -117,7 +136,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: 52,
-        left: 24,
-        top: -3,
+        left: 20,
+        top: 2,
+        marginRight: -6
     },
 })
