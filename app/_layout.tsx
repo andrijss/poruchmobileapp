@@ -33,6 +33,8 @@ export default function RootLayout() {
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen name="notifications" options={{ headerShown: false }} />
         <Stack.Screen name="Account" options={{ headerShown: false }} />
+        <Stack.Screen name="Coordinator" options={{ headerShown: false }} />
+        <Stack.Screen name="Event/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

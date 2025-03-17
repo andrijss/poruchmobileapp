@@ -4,12 +4,25 @@ import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
+import {Link} from 'expo-router';
+
 import {StyleSheet, TouchableOpacity} from "react-native";
 
-export default function EventHistoryElement({eventName, date} : {eventName: string, date: string}) {
+export default function Event({eventName,
+                                  date,
+                                  linkToEvent,
+                                  status} : {
+    eventName: string,
+    date: string,
+    linkToEvent: string,
+    status: string}) {
+    // @ts-ignore
     return (
         <ThemedView style={styles.eventContainer}>
-            <TouchableOpacity>
+            <Link href={'/Event/'.concat(linkToEvent)}>
+                <ThemedView style={{
+                    width: '100%',
+                }}>
                 <ThemedText style={{
                     fontWeight: 'bold'
                 }}>{date}</ThemedText>
@@ -25,13 +38,13 @@ export default function EventHistoryElement({eventName, date} : {eventName: stri
                     flexDirection: 'row',
                     top: 10
                 }}>
-                    <IconSymbol size={16} name="flag.fill" color={'#c4c4c4'} />
+                    <IconSymbol size={16} name="note" color={'#c4c4c4'} />
                     <ThemedText style={{
                         fontWeight: 'bold',
                         left: 6,
                         top: -1
                     }}>
-                        Подія завершена
+                        {status}
                     </ThemedText>
                 </ThemedView>
 
@@ -46,8 +59,8 @@ export default function EventHistoryElement({eventName, date} : {eventName: stri
                     <IconSymbol size={16} name="chevron.forward" color={'#c4c4c4'} style={{
                     }} />
                 </ThemedText>
-
-            </TouchableOpacity>
+                </ThemedView>
+            </Link>
         </ThemedView>
     );
 }
@@ -58,7 +71,7 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         height: 108,
         borderWidth: 1,
-        borderColor: '#636363',
+        borderColor: 'lightgray',
         marginBottom: 18,
         borderRadius: 12,
     }

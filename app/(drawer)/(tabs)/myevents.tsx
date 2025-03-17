@@ -1,16 +1,30 @@
 import { StyleSheet, Image, Platform } from 'react-native';
 
 import TopBar from '@/components/TopBar';
+import YouHaveUnread from "@/components/YouHaveUnread";
+
+import {ScrollView} from "react-native";
+
+import { Button } from 'react-native';
+import { Link } from 'expo-router';
+
+import Event from "@/components/Event";
+
+import { useNavigation } from 'expo-router';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function TabTwoScreen() {
-  return (
+    const navigation = useNavigation();
+
+  // @ts-ignore
+    // @ts-ignore
+    return (
       <ThemedView
       style={{
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
       }}>
         <TopBar
@@ -20,6 +34,29 @@ export default function TabTwoScreen() {
             notifications={false}
             blur={true}
         />
+
+          <ThemedView style={{
+              marginTop: 150,
+          }}>
+              <YouHaveUnread from={'Допомога у притулку", "Благодійний концерт'} amount={3}></YouHaveUnread>
+
+              <ScrollView style={{
+                  paddingHorizontal: 20,
+                  marginTop: 20,
+              }}>
+
+                  <Event eventName={'Допомога в притулку'} date={'3.02'} linkToEvent={'1'} status={'В дорозі'}></Event>
+                  <Event eventName={'Благодійний концерт'} date={'5.02'} linkToEvent={'2'} status={'Очікується підтвердження'}></Event>
+
+              </ScrollView>
+
+              <Link style={{
+                  color: 'white',
+              }} href="/Event/1">View first event details</Link>
+              <Link style={{
+                  color: 'white',
+              }} href="/Event/2">View second event details</Link>
+          </ThemedView>
       </ThemedView>
   );
 }

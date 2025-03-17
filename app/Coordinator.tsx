@@ -30,7 +30,7 @@ export default function Index() {
                     alignItems: "center",
                 }}>
                 <TopBar
-                    text={'Ваш профіль'}
+                    text={'Координатор'}
                     notifications={false}
                     backButton={true}
                     buttons={false}
@@ -38,31 +38,31 @@ export default function Index() {
                 />
 
                 <ThemedView style={styles.profileGroup}>
-                        <Avatar bgColor="$amber600" size="xl" borderRadius="$full">
-                            <AvatarFallbackText>John Doe</AvatarFallbackText>
-                        </Avatar>
-                        <ThemedView style={{
-                            left: 20,
-                            // top: 15
-                        }}>
-                            <ThemedText style={styles.usernameText}>John Doe</ThemedText>
-                            <ThemedText style={styles.goToProfileText}>Волонтер</ThemedText>
+                    <Avatar bgColor="#166534" size="xl" borderRadius="$full">
+                        <AvatarFallbackText>John Smith</AvatarFallbackText>
+                    </Avatar>
+                    <ThemedView style={{
+                        left: 20,
+                        // top: 15
+                    }}>
+                        <ThemedText style={styles.usernameText}>John Smith</ThemedText>
+                        <ThemedText style={styles.goToProfileText}>Волонтер, Координатор</ThemedText>
 
-                            <ThemedView style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                top: 4,
-                            }}>
-                                <IconSymbol size={16} name="pin.fill" color={'gray'} style={{
-                                }} />
-                                <ThemedText style={[styles.goToProfileText, {
-                                    top: -2,
-                                    left: 3
-                                }]}>
-                                    Львів
-                                </ThemedText>
-                            </ThemedView>
+                        <ThemedView style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            top: 4,
+                        }}>
+                            <IconSymbol size={16} name="pin.fill" color={'gray'} style={{
+                            }} />
+                            <ThemedText style={[styles.goToProfileText, {
+                                top: -2,
+                                left: 3
+                            }]}>
+                                Львів
+                            </ThemedText>
                         </ThemedView>
+                    </ThemedView>
                 </ThemedView>
                 <ThemedView style={styles.mainContent}>
 
@@ -70,13 +70,46 @@ export default function Index() {
                         display: 'flex',
                         flexDirection: 'row',
                     }}>
-                    <IconSymbol size={16} name="hammer.fill" color={'#c4c4c4'} style={{
-                        bottom: -2,
-                        marginRight: 6,
-                    }} />
-                    <ThemedText>
-                        Your skills will appear here...
-                    </ThemedText>
+
+                        <ThemedView style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            top: -6
+                        }}>
+                            <ThemedView style={{
+                                width: 164,
+                                height: 42,
+                                borderWidth: 1,
+                                borderColor: 'lightgray',
+                                borderRadius: 12,
+                                marginRight: 12,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <ThemedText style={{
+                                    fontWeight: 'bold'
+                                }}>
+                                    Чат
+                                </ThemedText>
+                            </ThemedView>
+                            <ThemedView style={{
+                                width: 164,
+                                height: 42,
+                                borderWidth: 1,
+                                borderColor: 'lightgray',
+                                borderRadius: 12,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <ThemedText style={{
+                                    fontWeight: 'bold'
+                                }}>
+                                    Зателефонувати
+                                </ThemedText>
+                            </ThemedView>
+                        </ThemedView>
                     </ThemedView>
 
                     <ThemedText style={{

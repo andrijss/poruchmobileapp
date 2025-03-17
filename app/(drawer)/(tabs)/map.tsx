@@ -63,7 +63,8 @@ export default function Index() {
                 loadingBackgroundColor={Colors[colorScheme ?? 'dark'].background}
                 loadingIndicatorColor={Colors[colorScheme ?? 'dark'].text}
             >
-                <Marker coordinate={{ latitude: 50.23256, longitude: 24.12055 }} onPress={() => {setShowModal(true)}}>
+                <Marker coordinate={{ latitude: 49.8366951,
+                    longitude: 24.0252233 }} onPress={() => {setShowModal(true)}}>
                     <View style={{
                         width: 60,
                         height: 60,
@@ -168,7 +169,7 @@ export default function Index() {
                             isReadOnly={true}
                             isChecked={true}
                             isInvalid={false}
-                            isDisabled={false}>
+                            isDisabled={false} value={""}>
                             <CheckboxIndicator mr="$2" style={{
                                 backgroundColor: '#444',
                                 borderColor: '#444'
@@ -190,7 +191,7 @@ export default function Index() {
                             isReadOnly={true}
                             isChecked={true}
                             isInvalid={false}
-                            isDisabled={false}>
+                            isDisabled={false} value={""}>
                             <CheckboxIndicator mr="$2" style={{
                                 backgroundColor: '#444',
                                 borderColor: '#444'
@@ -212,7 +213,7 @@ export default function Index() {
                             isReadOnly={true}
                             isChecked={false}
                             isInvalid={false}
-                            isDisabled={false}>
+                            isDisabled={false} value={""}>
                             <CheckboxIndicator mr="$2" style={{
                                 backgroundColor: '#444',
                                 borderColor: '#444'
