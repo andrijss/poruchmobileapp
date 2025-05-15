@@ -26,9 +26,6 @@ export default function DetailsScreen() {
             <ThemedView style={{
                 marginTop: 150,
             }}>
-
-                {/* Map and Event Info */}
-                <ScrollView>
                 <View style={styles.mapContainer}>
                     <MapView
                         style={styles.map}
@@ -52,6 +49,16 @@ export default function DetailsScreen() {
                         </View>
                     </View>
                 </View>
+
+                {/* Map and Event Info */}
+                <ScrollView>
+                    <View style={{
+                        top: 150,
+                        backgroundColor: "#121212",
+                        width: '100%',
+                    }}>
+
+
 
                 <View style={styles.coordinatorContainer}>
                     <TouchableOpacity onPress={() =>
@@ -99,6 +106,7 @@ export default function DetailsScreen() {
                         <Text style={styles.taskText}>Задача 2</Text>
                     </View>
                 </View>
+                </View>
 
                 </ScrollView>
                 {/* Timeline */}
@@ -124,6 +132,7 @@ export default function DetailsScreen() {
                     </TouchableOpacity>
                 </View>
 
+
             </ThemedView>
         </ThemedView>
     );
@@ -137,11 +146,11 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         marginBottom: 16,
-        paddingHorizontal: 24
+        position: 'static',
+        flex: 1,
     },
     map: {
-        height: 200,
-        borderRadius: 16,
+        height: 400,
     },
     eventInfo: {
         marginTop: 8,
@@ -192,7 +201,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 24,
-        top: -42
+        top: 0
     },
     coordinatorImage: {
         width: 50,
@@ -257,8 +266,8 @@ const styles = StyleSheet.create({
     },
     timelineBar: {
         flex: 1,
-        height:10,
-        backgroundColor: '#e0e0e0',
+        height:14,
+        backgroundColor: '#c5c5c5',
         marginHorizontal: 8,
         borderRadius: 4,
     },
@@ -279,10 +288,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 12,
-        backgroundColor: 'transparent',
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: 'lightgray',
+        backgroundColor: '#181818',
+        borderRadius: 16,
         flex: 1,
         marginHorizontal: 4,
     },

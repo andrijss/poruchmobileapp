@@ -27,7 +27,7 @@ const Divider: React.FC<DividerProps> = ({ amount, from }) => {
             }} />
             <ThemedView style={{
                 position: 'absolute',
-                backgroundColor: 'red',
+                backgroundColor: '#D00E07FF',
                 borderRadius: 10,
                 width: 20,
                 top: 31,
@@ -52,16 +52,16 @@ const Divider: React.FC<DividerProps> = ({ amount, from }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "transparent", // Колір фону
-        borderRadius: 12, // Закруглення кутів
+        backgroundColor: "#1A1A1A", // Колір фону
+        borderRadius: 18, // Закруглення кутів
         shadowColor: "#000", // Тінь
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        borderWidth: 1,
+        shadowOpacity: 0.38,
+        shadowRadius: 12,
+        borderWidth: 0,
         width: windowWidth - 48,
         borderColor: "#d5d5d5",
-        marginHorizontal: 24,
+        marginHorizontal: 0,
         elevation: 3, // Тінь для Android
         position: "relative",
         display: "flex",

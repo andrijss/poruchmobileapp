@@ -5,6 +5,7 @@ import Divider from "@/components/Divider";
 import TopBar from "@/components/TopBar";
 import Notification from "@/components/Notification";
 import UnreadNotification from "@/components/UnreadNotification";
+import RadialGradientBackground from "@/components/RadialGradientBackground";
 
 import { config } from "@gluestack-ui/config"
 import { GluestackUIProvider } from "@gluestack-ui/themed"
@@ -15,7 +16,7 @@ import { useNavigation } from 'expo-router';
 import React from "react";
 
 export default function Index() {
-    const navigation = useNavigation();
+    const navigation:any = useNavigation();
 
     return (
         <GluestackUIProvider config={config}>
@@ -25,6 +26,8 @@ export default function Index() {
                     justifyContent: "flex-start",
                     alignItems: "center",
                 }}>
+                <RadialGradientBackground></RadialGradientBackground>
+
                 <TopBar
                     text={'Сповіщення'}
                     notifications={false}
@@ -35,11 +38,11 @@ export default function Index() {
 
                 <ThemedView style={{
                     position: 'absolute',
-                    backgroundColor: 'red',
+                    backgroundColor: '#d00e07',
                     borderRadius: 18,
                     width: 32,
-                    right: 90,
-                    top: 88,
+                    right: 126,
+                    top: 91,
                     height: 24,
                     alignItems: 'center',
                     justifyContent: 'center',

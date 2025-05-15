@@ -1,16 +1,36 @@
 import {ThemedView} from "@/components/ThemedView";
 import {ThemedText} from "@/components/ThemedText";
 import TopBar from "@/components/TopBar";
+import Button from "@/components/Button";
+import {Image} from "expo-image";
+
+import Event from "@/components/Event";
+
+import CTabs from "@/components/CTabs";
+import {LinearGradient} from "expo-linear-gradient";
+import RadialGradientBackground from "@/components/RadialGradientBackground";
 
 import { config } from "@gluestack-ui/config"
 import { GluestackUIProvider } from "@gluestack-ui/themed"
 
 import {View, Text, StyleSheet, TouchableOpacity, ScrollView} from "react-native";
+import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 import { useNavigation } from 'expo-router';
 
+import {supabase} from "@/utils/supabase";
+import {useFonts} from "expo-font";
+import {IconSymbol} from "@/components/ui/IconSymbol";
+import React from "react";
+
 export default function Index() {
     const navigation = useNavigation();
+
+    const [loaded] = useFonts({
+        "FontMedium": require('../../../assets/fonts/MontserratAlternates-Medium.ttf'),
+        "FontBold": require('../../../assets/fonts/MontserratAlternates-Bold.ttf'),
+        "FontRegular": require('../../../assets/fonts/MontserratAlternates-Regular.ttf'),
+    });
 
     return (
         <GluestackUIProvider config={config}>
@@ -20,6 +40,16 @@ export default function Index() {
                 justifyContent: "flex-start",
                 alignItems: "center",
               }}>
+                {/*<LinearGradient colors={['rgba(236,83,1,0.5)', 'transparent']} style={{*/}
+                {/*    width: '100%',*/}
+                {/*    height: '50%',*/}
+                {/*    position: 'absolute',*/}
+                {/*    display: 'flex'*/}
+                {/*}}>*/}
+                {/*</LinearGradient>*/}
+
+                <RadialGradientBackground></RadialGradientBackground>
+
                 <TopBar
                     text={'Головна'}
                     notifications={true}
@@ -28,158 +58,145 @@ export default function Index() {
                     blur={false}
                 />
 
-                <ThemedView style={{
+                <View style={{
+                    width: '100%',
+                    height: '18%',
+                    top: 145,
                     paddingHorizontal: 24,
-                    top: 145
+
+                    shadowColor: '#d93902',
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0.6,
+                    shadowRadius: 10,
                 }}>
-                <View style={styles.tabsContainer}>
-                    <TouchableOpacity style={[styles.tabButton, styles.activeTab]}>
-                        <Text style={[styles.tabText, styles.activeTabText]}>Всі</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.tabButton}>
-                        <Text style={styles.tabText}>Події</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.tabButton}>
-                        <Text style={styles.tabText}>Збори</Text>
-                    </TouchableOpacity>
+                    <LinearGradient style={{
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: 18,
+                        padding: 24
+                    }} start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}} colors={["#fe7000", "#e43800", "#d00e07"]}>
+                        <Text style={{
+                            color: '#fefefe',
+                            fontWeight: '700',
+                            fontSize: 24,
+                            top: 12,
+                            width: 180,
+                            fontFamily: 'FontBold'
+
+                        }}>
+                            Доєднуйся       до команди координаторів
+                        </Text>
+                        <Image
+                            source={require('../../../assets/images/voulonteer.png')}
+                            style={{
+                                width: 200,
+                                height: 180,
+                                top: 0,
+                                right: -20,
+                                position: 'absolute'
+                            }}
+                        ></Image>
+                    </LinearGradient>
                 </View>
 
-                {/* Category Buttons */}
-                <View style={styles.categoryContainer}>
-                    <TouchableOpacity style={styles.categoryButton}>
-                        <Text style={styles.categoryText}>Відновлення</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.categoryButton}>
-                        <Text style={styles.categoryText}>Гуманітарка</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.categoryButton}>
-                        <Text style={styles.categoryText}>Медичні</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.categoryButton}>
-                        <Text style={styles.categoryText}>Культура та освіта</Text>
-                    </TouchableOpacity>
-                </View>
+                <ThemedView style={{
+                    backgroundColor: '#141414',
+                    paddingHorizontal: 24,
+                    top: 166,
+                    paddingTop: 24,
+                    borderTopRightRadius: 24,
+                    borderTopLeftRadius: 24,
+                    width: '100%',
+                    height: '100%',
 
-                {/* Section Titles */}
-                <Text style={styles.sectionTitle}>Постійні події</Text>
-                    <ThemedView style={{
+                    shadowColor: '#000000',
+                    shadowOffset: { width: 0, height: -4 },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 16,
+                }}>
+                    <View style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        marginBottom: 24
                     }}>
-                        <ThemedView style={{
-                            width: 160,
-                            height: 140,
-                            backgroundColor: 'transparent',
-                            borderWidth: 1,
-                            borderColor: 'lightgray',
-                            borderRadius: 14,
-                            marginRight: 18,
-                            padding: 12
-                        }}>
-                            <Text style={{
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                                color: 'lightgray',
-                                marginBottom: 14
-                            }}>
-                                Допомога у притулку
-                            </Text>
-                            <Text style={{
-                                fontSize: 16,
-                                color: 'lightgray',
-                                fontWeight: 'bold'
-                            }}>
-                                📌Львів, центр
-                            </Text>
-                            <Text style={{
-                                fontSize: 16,
-                                color: 'lightgray',
-                                fontWeight: 'bold',
-                                top: 29
-                            }}>
-                                9:00 - 18:00
-                            </Text>
-                        </ThemedView>
+                        <Text style={{
+                            color: "#fefefe",
+                            fontSize: 28,
+                            fontWeight: 'bold',
+                            fontFamily: 'FontBold'
+                        }}>Події</Text>
 
-                        <ThemedView style={{
-                            width: 160,
-                            height: 140,
-                            backgroundColor: 'transparent',
-                            borderWidth: 1,
-                            borderColor: 'lightgray',
-                            borderRadius: 14,
-                            padding: 12
+                        <View style={{
+                            position: 'absolute',
+                            right: 0,
+                            display: 'flex',
+                            flexDirection: 'row',
+                            top: 2,
                         }}>
-                            <Text style={{
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                                marginBottom: 10,
-                                color: 'lightgray',
-                            }}>
-                                Здача крові
-                            </Text>
+                            <View>
+                                <Text style={{
+                                    color: "#fefefe",
+                                    fontSize: 14,
+                                    fontWeight: 'bold',
+                                    fontFamily: 'FontBold',
+                                    textAlign: 'right',
+                                }}></Text>
+                                <Text style={{
+                                    color: "#fefefe",
+                                    fontSize: 14,
+                                    fontWeight: 'bold',
+                                    fontFamily: 'FontBold',
+                                    textAlign: 'right',
+                                }}></Text>
+                            </View>
+                        </View>
+                    </View>
 
-                            <Text style={{
-                                fontSize: 16,
-                                fontWeight: 'bold',
-                                color: 'lightgray',
-                            }}>
-                                📌Львів, медичний університет
-                            </Text>
-                            <Text style={{
-                                fontSize: 16,
-                                fontWeight: 'bold',
-                                top: 22,
-                                color: 'lightgray',
-                            }}>
-                                7:30 - 14:00
-                            </Text>
-                        </ThemedView>
-                    </ThemedView>
+                    <CTabs style={{
+                        marginTop: 16,
+                        marginBottom: 16,
+                        shadowColor: '#000000',
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.4,
+                        shadowRadius: 16,
+                    }}></CTabs>
 
-                <Text style={styles.sectionTitle}>Разові події</Text>
-                    <ThemedView style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        marginBottom: 24
-                    }}>
-                        <ThemedView style={{
-                            width: 160,
-                            height: 140,
-                            backgroundColor: 'transparent',
-                            borderWidth: 1,
-                            borderColor: 'lightgray',
-                            borderRadius: 14,
-                            marginRight: 18,
-                            padding: 12
-                        }}>
-                            <Text style={{
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                                marginBottom: 14,
-                                color: 'lightgray',
+                    <SafeAreaProvider>
+                        <SafeAreaView edges={['top']}>
+                            <ScrollView style={{
+                                height: 288,
                             }}>
-                                Благодійний концерт
-                            </Text>
-                            <Text style={{
-                                fontSize: 16,
-                                fontWeight: 'bold',
-                                color: 'lightgray',
-                            }}>
-                                📌Львів, центр
-                            </Text>
-                            <Text style={{
-                                fontSize: 16,
-                                fontWeight: 'bold',
-                                top: 28,
-                                color: 'lightgray',
-                            }}>
-                                18:30 - 22:30
-                            </Text>
-                        </ThemedView>
-                    </ThemedView>
+                                <Event eventName={"Допомога в притулку"}
+                                       date={"24 квітня 2025"}
+                                       linkToEvent={'1'}
+                                       status={"active"}
+                                       type={'a'}
+                                       address={"вул. Керамічна 4"}
+                                />
+
+                                <Event eventName={"Допомога в притулку"}
+                                       date={"24 квітня 2025"}
+                                       linkToEvent={'1'}
+                                       status={"soon"}
+                                       type={'a'}
+                                       address={"вул. Наукова 72"}/>
+                                <Event eventName={"Допомога в притулку"}
+                                       date={"24 квітня 2025"}
+                                       linkToEvent={'1'}
+                                       status={"soon"}
+                                       type={'a'}
+                                       address={"вул. Театральна 23"}/>
+                                <Event eventName={"Допомога в притулку"}
+                                       date={"24 квітня 2025"}
+                                       linkToEvent={'1'}
+                                       status={"finished"}
+                                       type={'a'}
+                                       address={"вул. Хімічна 4"}
+                                />
+                            </ScrollView>
+                        </SafeAreaView>
+                    </SafeAreaProvider>
                 </ThemedView>
+
             </ThemedView>
         </GluestackUIProvider>
     );
@@ -188,62 +205,5 @@ export default function Index() {
 const styles = StyleSheet.create({
     map: {
         ...StyleSheet.absoluteFillObject,
-    },
-    tabsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '80%',
-        height: 32,
-        marginBottom: 24,
-    },
-    tabButton: {
-        flex: 1,
-        paddingTop: 8,
-        alignItems: 'center',
-        borderRadius: 50,
-        marginHorizontal: 4,
-        backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderColor: 'lightgray',
-    },
-    activeTab: {
-        backgroundColor: '#e0e0e0',
-    },
-    tabText: {
-        fontSize: 14,
-        color: 'lightgray',
-        fontWeight: 'bold',
-    },
-    activeTabText: {
-        fontWeight: 'bold',
-        color: '#222'
-    },
-    categoryContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        marginBottom: 16,
-    },
-    categoryButton: {
-        width: '48%',
-        padding: 16,
-        alignItems: 'center',
-        backgroundColor: 'rgba(255,255,255,0.02)',
-        borderRadius: 12,
-        marginBottom: 16,
-        borderColor: 'lightgray',
-        borderWidth: 1,
-    },
-    categoryText: {
-        fontSize: 16,
-        color: 'lightgray',
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16,
-        color: 'lightgray',
     },
 })

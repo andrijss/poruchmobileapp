@@ -26,6 +26,7 @@ export default function TabTwoScreen() {
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center",
+        backgroundColor: '#121212'
       }}>
         <TopBar
             text={'Мої події'}
@@ -37,25 +38,40 @@ export default function TabTwoScreen() {
 
           <ThemedView style={{
               marginTop: 150,
+              backgroundColor: '#121212'
           }}>
-              <YouHaveUnread from={'Допомога у притулку", "Благодійний концерт'} amount={3}></YouHaveUnread>
+
 
               <ScrollView style={{
-                  paddingHorizontal: 20,
-                  marginTop: 20,
+                  paddingHorizontal: 24,
               }}>
-
-                  <Event eventName={'Допомога в притулку'} date={'3.02'} linkToEvent={'1'} status={'В дорозі'}></Event>
-                  <Event eventName={'Благодійний концерт'} date={'5.02'} linkToEvent={'2'} status={'Очікується підтвердження'}></Event>
+                  <YouHaveUnread from={'Допомога у притулку", "Благодійний концерт'} amount={3}></YouHaveUnread>
+                  <Event
+                      eventName={'Допомога в притулку'}
+                      date={'3.02'}
+                      linkToEvent={'1'}
+                      status={'active'}
+                      type={'a'}
+                      address={'Університетська 1'}
+                  >
+                  </Event>
+                  <Event
+                      eventName={'Благодійний концерт'}
+                      date={'5.02'}
+                      linkToEvent={'2'}
+                      status={'soon'}
+                      type={'a'}
+                      address={'театр Опери та балету'}>
+                  </Event>
 
               </ScrollView>
 
-              <Link style={{
-                  color: 'white',
-              }} href="/Event/1">View first event details</Link>
-              <Link style={{
-                  color: 'white',
-              }} href="/Event/2">View second event details</Link>
+              {/*<Link style={{*/}
+              {/*    color: 'white',*/}
+              {/*}} href="/Event/1">View first event details</Link>*/}
+              {/*<Link style={{*/}
+              {/*    color: 'white',*/}
+              {/*}} href="/Event/2">View second event details</Link>*/}
           </ThemedView>
       </ThemedView>
   );

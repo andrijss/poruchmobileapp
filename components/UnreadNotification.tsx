@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import {useFonts} from "expo-font";
 
 export default function UnreadNotification({ category, time, name, message }: {
     category: string;
@@ -7,6 +8,12 @@ export default function UnreadNotification({ category, time, name, message }: {
     name: string;
     message: string;
 }) {
+    const [loaded] = useFonts({
+        "FontMedium": require('../assets/fonts/MontserratAlternates-Medium.ttf'),
+        "FontBold": require('../assets/fonts/MontserratAlternates-Bold.ttf'),
+        "FontRegular": require('../assets/fonts/MontserratAlternates-Regular.ttf'),
+    });
+
     return (
         <View style={styles.card}>
             {/* Верхній рядок з категорією і часом */}
@@ -25,12 +32,10 @@ export default function UnreadNotification({ category, time, name, message }: {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: "transparent", // Колір фону
-        borderRadius: 12, // Закруглення кутів
+        backgroundColor: "#181818", // Колір фону
+        borderRadius: 18, // Закруглення кутів
         padding: 12, // Внутрішні відступи
         shadowColor: "#000", // Тінь
-        borderWidth: 1,
-        borderColor: "#d5d5d5",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 5,
@@ -50,21 +55,23 @@ const styles = StyleSheet.create({
     },
     category: {
         fontSize: 18,
-        fontWeight: "bold",
-        color: "#d5d5d5",
+        fontFamily: "FontBold",
+        color: "#fefefe",
     },
     time: {
         fontSize: 14,
         color: "#999",
         top: 3,
+        fontFamily: "FontMedium",
     },
     body: {
         fontSize: 16,
-        color: "#d5d5d5",
+        color: "#fefefe",
         paddingHorizontal: 4,
         lineHeight: 18, // Висота рядків
+        fontFamily: "FontMedium",
     },
     name: {
-        fontWeight: "bold",
+        fontFamily: "FontBold",
     },
 });

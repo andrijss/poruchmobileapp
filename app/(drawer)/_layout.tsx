@@ -15,9 +15,16 @@ import {Avatar, AvatarFallbackText} from "@gluestack-ui/themed";
 
 import { config } from "@gluestack-ui/config"
 import { GluestackUIProvider } from "@gluestack-ui/themed"
+import {useFonts} from "expo-font";
 
 export default function DrawerLayout() {
   const colorScheme = useColorScheme();
+  const [loaded] = useFonts({
+        "FontMedium": require('../../assets/fonts/MontserratAlternates-Medium.ttf'),
+        "FontBold": require('../../assets/fonts/MontserratAlternates-Bold.ttf'),
+        "FontRegular": require('../../assets/fonts/MontserratAlternates-Regular.ttf'),
+  });
+
 
   return (
       <GestureHandlerRootView style={{ flex: 1 }}>
@@ -48,12 +55,12 @@ function CustomDrawerContent({ navigation }:{ navigation: any}) {
                     borderBottomWidth: 0,
                     marginBottom: 0,
                 }]}>
-                    <Avatar bgColor="$amber600" size="lg" borderRadius="$full">
+                    <Avatar bgColor="#E43800FF" size="lg" borderRadius="$full">
                         <AvatarFallbackText>John Doe</AvatarFallbackText>
                     </Avatar>
                     <ThemedView style={{
                         left: 18,
-                        top: 15
+                        top: 15,
                     }}>
                         <ThemedText style={styles.usernameText}>John Doe</ThemedText>
                         <ThemedText style={styles.goToProfileText}>Переглянути профіль</ThemedText>
@@ -85,6 +92,7 @@ const styles    = StyleSheet.create({
         marginTop: 'auto',
         fontSize: 14,
         color: 'gray',
+        fontFamily: "FontMedium"
     },
     profileGroup: {
         flexDirection: 'row',
@@ -99,10 +107,11 @@ const styles    = StyleSheet.create({
     },
     usernameText: {
         fontSize: 26,
-        fontWeight: 'bold',
+        fontFamily: "FontBold"
     },
     goToProfileText: {
         fontSize: 14,
         color: 'gray',
+        fontFamily: "FontMedium"
     }
 });

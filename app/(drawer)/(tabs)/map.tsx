@@ -5,6 +5,7 @@ import {StyleSheet} from "react-native";
 import * as Location from 'expo-location';
 
 import {Dimensions} from 'react-native';
+;
 
 import {
     Modal,
@@ -33,6 +34,7 @@ import { BlurView } from 'expo-blur';
 
 
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import CTabs from '@/components/CTabs';
 import React from 'react';
 
 const windowWidth = Dimensions.get('window').width;
@@ -44,7 +46,6 @@ export default function Index() {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
 
     const [showModal, setShowModal] = useState(false)
-    console.log(showModal)
     const ref = React.useRef(null)
 
     return (
@@ -99,6 +100,7 @@ export default function Index() {
             </MapView>
             <BlurView style={styles.topFilter} intensity={50}>
             </BlurView>
+
 
             <View style={[styles.topFilter, {
                 zIndex: 101,

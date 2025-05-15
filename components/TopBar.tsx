@@ -25,6 +25,7 @@ import {ThemedText} from "@/components/ThemedText";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import NavigationContainer from "@react-navigation/native";
+import {useFonts} from "expo-font";
 
 function TopBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -38,6 +39,12 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
 
     const navigation = useNavigation();
 
+    const [loaded] = useFonts({
+        "FontMedium": require('../assets/fonts/MontserratAlternates-Medium.ttf'),
+        "FontBold": require('../assets/fonts/MontserratAlternates-Bold.ttf'),
+        "FontRegular": require('../assets/fonts/MontserratAlternates-Regular.ttf'),
+    });
+
     return (
         <GluestackUIProvider config={config}>
         <ThemedView style={styles.topBar}>
@@ -46,7 +53,7 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
                 <ThemedView style={styles.backButtonStyle}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <IconSymbol size={24} name='chevron.backward' color={'#c4c4c4'} style={{
-                            bottom: -2,
+                            bottom: -6,
                             marginRight: 8,
                         }} />
                     </TouchableOpacity>
@@ -59,12 +66,16 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
                 <ThemedView style={[styles.menuButton, {left: -2}]} >
                         <TouchableOpacity onPress={() => navigation.navigate('notifications')}>
                             <IconSymbol size={32} name="bell.fill" color={'#c4c4c4'} style={{
-                                bottom: -3
+                                bottom: -3,
+                                shadowColor: '#000000',
+                                shadowOffset: { width: 0, height: 4 },
+                                shadowOpacity: 0.28,
+                                shadowRadius: 16,
                             }} />
                         </TouchableOpacity>
                     <ThemedView style={{
                         position: 'absolute',
-                        backgroundColor: 'red',
+                        backgroundColor: '#D00E07FF',
                         borderRadius: 10,
                         width: 20,
                         right: 8,
@@ -72,6 +83,7 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
                         height: 20,
                         alignItems: 'center',
                         justifyContent: 'center',
+
                     }}>
                         <ThemedText style={{color: '#fff', fontSize: 12, fontWeight: 'bold'}}>3</ThemedText>
                     </ThemedView>
@@ -82,10 +94,14 @@ export default function TopBar({ text, buttons, backButton, notifications, blur 
                 <ThemedView style={styles.menuButton}>
                     <TouchableOpacity
                         style={{
-                            top: 3
+                            top: 3.5,
+                            shadowColor: '#000000',
+                            shadowOffset: { width: 0, height: 4 },
+                            shadowOpacity: 0.38,
+                            shadowRadius: 16,
                         }}
                         onPress={() => navigation.openDrawer()}>
-                        <Avatar bgColor="$amber600" size="sm" borderRadius="$full">
+                        <Avatar bgColor="#E43800FF" size="sm" borderRadius="$full">
                             <AvatarFallbackText>John Doe</AvatarFallbackText>
                         </Avatar>
                     </TouchableOpacity>
@@ -127,8 +143,8 @@ const styles = StyleSheet.create({
         width: '70%',
         padding: 10,
         paddingLeft: 24,
-        fontWeight: 800,
-        fontSize: 36,
+        fontFamily: 'FontBold',
+        fontSize: 28,
         top: 18
     },
     backButtonStyle: {
